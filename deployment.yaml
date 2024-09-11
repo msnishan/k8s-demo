@@ -16,5 +16,11 @@ spec:
         - name: k8s-demo
           image: k8s-demo:latest
           imagePullPolicy: Never
+          env:
+            - name: SySValue
+              valueFrom:
+                configMapKeyRef:
+                  name: k8s-demo-cm
+                  key: SySValue
           ports:
             - containerPort: 8080

@@ -2,6 +2,7 @@ package com.handson.k8s.demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientSsl;
@@ -28,6 +29,14 @@ public class DemoApplication {
 	private final Map<String, Student> studentMap = new HashMap<>();
 
 	RestTemplate restTemplate = new RestTemplate();
+
+	@Value("${SySValue: default}")
+	private String fromEnv;
+
+	@GetMapping("/system-prop")
+	public String getValueFromEnv() {
+		return fromEnv;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
